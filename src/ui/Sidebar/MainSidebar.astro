@@ -1,0 +1,77 @@
+---
+import playlist from '@/data/playlist.json';
+import PlayListItem from '@/components/PlayListItem.astro';
+import List from '@/icons/list.astro';
+
+const sortRule = (a: { pinned: boolean }) => (a.pinned ? -1 : 1);
+---
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .playlist-container {
+    font-family: var(--default-font);
+    padding: 0.3vmax;
+    min-height: max-content;
+
+    & .search-container {
+      display: flex;
+      align-items: center;
+      padding: 0.5vmax;
+      padding-left: 0.8vmax;
+
+      .text {
+        font-size: 0.8vmax;
+      }
+
+      & input[type='search'] {
+        border: 0;
+        background: transparent;
+        padding: 0.4rem 0;
+        margin: 0 0.5rem;
+        width: 150px;
+      }
+
+      & > span {
+        display: flex;
+        align-items: center;
+        gap: 0.3vmax;
+      }
+    }
+
+    & .playlist {
+      display: flex;
+      flex-direction: column;
+      gap: 0 0.5rem;
+      padding: 0 0.3vmax;
+      overflow-y: scroll;
+      height: max-content;
+    }
+
+    .playlist::-webkit-scrollbar {
+      width: 0.6vmax;
+    }
+    .playlist::-webkit-scrollbar-thumb {
+      background: #fff4;
+      border-radius: 0 var(--pad-gap) var(--pad-gap) 0;
+    }
+    .playlist::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
+</style>
+
+<div class='container'>
+  <div class='playlist-container'>
+    <div class='search-container'>
+      <span class='text'><List width='0.8vmax' color='#ddd' /> Listas</span>
+    </div>
+
+    <div class='playlist'>
+      {playlist.sort(a => sortRule(a)).map(pItem => <PlayListItem {...pItem} />)}
+    </div>
+  </div>
+</div>

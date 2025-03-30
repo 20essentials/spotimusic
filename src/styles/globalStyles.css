@@ -1,0 +1,10 @@
+:root {
+  --pad-gap: 1vmax;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}

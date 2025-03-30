@@ -1,0 +1,109 @@
+---
+import MainSidebar from './MainSidebar.astro';
+---
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: var(--pad-gap) 0;
+  }
+
+  .top-sidebar {
+    background: var(--medium-bgcolor);
+    border-radius: var(--border-radius);
+    min-height: 3vmax;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    padding: 1vmax;
+
+    .btn {
+      position: relative;
+      background-color: #1e293b;
+      width: 100%;
+      min-height: 3vmax;
+      border: 0.15vmax solid var(--theme-color);
+      color: var(--theme-color);
+      border-radius: 0.5vmax;
+      overflow: hidden;
+      cursor: pointer;
+      padding: 0.3vmax;
+
+      input {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        font-size: 1vmax;
+        padding-left: 0.8vmax;
+        color: var(--theme-color);
+        display: flex;
+
+        &,
+        &:focus {
+          border: none;
+          outline: none;
+        }
+      }
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(0.5vmax);
+        transition: all 0.5s ease;
+      }
+
+      &::before {
+        --s: 2vmax;
+        width: var(--s);
+        height: var(--s);
+        background-color: var(--theme-color);
+        top: 0.4vmax;
+        right: 0.4vmax;
+        z-index: 10;
+      }
+
+      &::after {
+        --s: 3.2vmax;
+        width: var(--s);
+        height: var(--s);
+        background-color: var(--theme-color);
+        filter: blur(0.6vmax) invert(1);
+        top: 0.8vmax;
+        right: 1.2vmax;
+        z-index: 10;
+      }
+
+      &:hover::before {
+        right: 40px;
+        bottom: -16px;
+        filter: blur(15px);
+      }
+
+      &:hover::after {
+        right: -24px;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .main-sidebar {
+    background: var(--medium-bgcolor);
+    border-radius: var(--border-radius);
+    height: 100%;
+  }
+</style>
+
+<div class='container'>
+  <div class='top-sidebar'>
+    <button class='btn'>
+      <input type='text' maxlength='15' placeholder='Seach' />
+    </button>
+  </div>
+  <div class='main-sidebar'>
+    <MainSidebar />
+  </div>
+</div>

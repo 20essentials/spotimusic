@@ -1,0 +1,35 @@
+---
+import { Icon } from 'astro-icon/components';
+import Volume from '@/icons/volume.astro';
+---
+
+<style>
+  .song-volume-container {
+    width: 10vmax;
+    margin-left: auto;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2.3vmax 1fr;
+    gap: 0.3vmax;
+    align-items: center;
+    align-content: center;
+  }
+
+  * {
+    cursor: pointer;
+  }
+
+  .volume-icon {
+    width: 1.1vmax;
+  }
+</style>
+
+<div class='song-volume-container'>
+  <Volume class='volume-icon' />
+  <progress-slider class='slider' id='volume' value='100'></progress-slider>
+</div>
+
+<script type='module'>
+  // document.addEventListener('volume:mute', () => toggleVolumeIcon(false));
+  // document.addEventListener('volume:unmute', () => toggleVolumeIcon(true));
+</script>

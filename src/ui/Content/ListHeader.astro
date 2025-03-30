@@ -1,0 +1,151 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+
+<script type='module'>
+  import { formatTime, convertToSeconds } from './modules/formatTime.js';
+
+  class ListHeader extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+    }
+
+    static get styles() {
+      return /* css */ `
+        :host {
+          mix-blend-mode: normal;
+          z-index: 5;
+        }
+
+        .texting-strong {
+          font-size: 1.5vmax;
+        }
+
+        .texting-h1 {
+          font-size: 5vmax;
+        }
+
+        header {
+          display: flex;
+          flex-direction: column;
+          padding: 0.5vmax;
+          
+
+  
+          & .data {
+            display: flex;
+            gap: 0 1.2vmax;
+            padding: 1.3vmax;
+
+            & .cover {
+              --size: 12vmax;
+              width: var(--size);
+              height: var(--size);
+              border-radius: 0.2vmax;
+              box-shadow:
+                0 4px 1vmax #0008,
+                0 0 1vmax #000a;
+              background-color: #fff1;
+            }
+
+            & .avatar {
+              --size: 1vmax;
+              width: var(--size);
+              height: var(--size);
+              background-image: url("./assets/favicon.webp");
+              background-size: cover;
+              border-radius: 50%;
+            }
+
+            & .info {
+              display: flex;
+              flex-direction: column;
+              justify-content: end;
+              font-family: var(--default-font);
+
+              & .row {
+                display: grid;
+                grid-auto-flow: column;
+                justify-content: start;
+                gap: 0.5vmax;
+                align-items: center;
+              }
+
+              & h1 {
+                margin: 0;
+                font-weight: 800;
+                letter-spacing: -0.1vmax;
+                font-size: 3.5vmax;
+              }
+
+              & .total-duration {
+                color: var(--dark-textcolor);
+              }
+
+              .info-subtitle,
+              .total-duration {
+                font-size: 0.95vmax;
+              }
+            }
+          }
+        }
+      `;
+    }
+
+    setData(title, songs) {
+      const slug = title.toLowerCase().replaceAll(' ', '');
+      const total = songs.length;
+      const duration = songs
+        .map(song => convertToSeconds(song.duration))
+        .reduce((first, acc) => first + acc, 0);
+      const [min] = formatTime(duration).split(':');
+      const time = `${min} min `;
+
+      this.shadowRoot.querySelector('h1').textContent = title;
+      this.shadowRoot.querySelector('.info-subtitle').textContent =
+        `Spotimusic · ${total} canciones,`;
+      this.shadowRoot.querySelector('.total-duration').textContent =
+        `${time} de duración aproximadamente`;
+
+      setTimeout(() => {
+        const result = `.playlist-item[data-id=${slug}] img`;
+        this.shadowRoot.querySelector('img.cover').src =
+          document.querySelector(result)?.src;
+      }, 20);
+    }
+
+    connectedCallback() {
+      this.render();
+
+    }
+
+    render() {
+      this.shadowRoot.innerHTML = /* html */ `
+        <style>${ListHeader.styles}</style>
+        <header>
+          <div class="data">
+            <img class="cover" src="./assets/transparent.png" alt="Cover Image">
+            <div class="info">
+              <strong class="texting-strong">Lista</strong>
+              <h1 class="texting-h1">MusicDev</h1>
+              <div class="row">
+                <div class="avatar"></div>
+                <span class="info-subtitle">Spotimusic · 15 canciones,</span>
+                <span class="total-duration">42 min de duración aproximadamente</span>
+              </div>
+            </div>
+          </div>
+        </header>
+      `;
+    }
+  }
+
+  customElements.define('list-header', ListHeader);
+</script>
+
+<list-header>
+  <Icon name='chevron-right' slot='right' />
+  <Icon name='chevron-left' slot='left' />
+</list-header>

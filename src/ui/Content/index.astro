@@ -1,0 +1,61 @@
+---
+import Playlist from './Playlist.astro';
+import ListHeader from './ListHeader.astro';
+---
+
+<style>
+  .container {
+    --dark-theme-color: color-mix(in srgb, var(--theme-color), #000 75%);
+    display: grid;
+    background: linear-gradient(
+      to bottom,
+      var(--theme-color),
+      var(--dark-theme-color) 60%
+    );
+    border-radius: var(--border-radius);
+    max-height: calc(100vh - var(--player-height) - (var(--pad-gap) * 2));
+    overflow-y: scroll;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background: linear-gradient(to right, transparent, #000 45%),
+        linear-gradient(
+          to bottom,
+          var(--theme-color),
+          var(--dark-theme-color) 60%
+        ),
+        var(--song-image, linear-gradient(transparent, transparent));
+      width: 100vw;
+      height: 100vh;
+      opacity: 0.025;
+      background-blend-mode: normal, color, color;
+      pointer-events: none;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: 20%;
+      background-blend-mode: color;
+      z-index: 0;
+      transition: opacity 0.25s;
+      overflow: hidden;
+      display: none;
+    }
+  }
+
+  .container::-webkit-scrollbar {
+    width: 0.7vmax;
+  }
+  .container::-webkit-scrollbar-thumb {
+    border-radius: var(--pad-gap) 0;
+    background-color: #fff3;
+    border-radius: 0 var(--pad-gap) var(--pad-gap) 0;
+  }
+  .container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+</style>
+
+<div class='container'>
+  <ListHeader />
+  <Playlist />
+</div>

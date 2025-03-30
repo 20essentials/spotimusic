@@ -1,0 +1,90 @@
+---
+// import { Icon } from 'astro-icon/components';
+import PinnedIcon from '@/icons/pinned.astro';
+const { slug, title, subtitle, pinned, color } = Astro.props;
+
+type SongData = {
+  urlPoster: string;
+  [key: string]: any;
+};
+
+const files = import.meta.glob('../data/*.json', { eager: true }) as Record<
+  string,
+  { default: SongData[] }
+>;
+
+const mySlug = `../data/${slug}.json`; // Variable dinámica
+const currentJson = files[mySlug]?.default || []; // Acceso dinámico
+const randomNumber = ~~(Math.random() * currentJson.length);
+const randomSrc = currentJson[randomNumber]?.urlPoster || '';
+const image = randomSrc;
+---
+
+<style>
+  .playlist-item {
+    display: flex;
+    align-items: center;
+    padding: 0.4vmax;
+    gap: 0.5vmax;
+    border-radius: 8px;
+    height: max-content;
+
+    @media (width <= 1111px) {
+      border-radius: var(--pad-gap);
+    }
+
+    &:hover {
+      background: var(--light-bgcolor);
+      cursor: pointer;
+    }
+
+    & img {
+      --avatar-size: 3vmax;
+      width: var(--avatar-size);
+      height: var(--avatar-size);
+      border-radius: 0.4vmax;
+    }
+
+    & .data {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1vmax;
+      height: 3vmax;
+      height: 100%;
+      justify-itemss: center;
+
+      & .title {
+        font-weight: 400;
+        font-size: 1vmax;
+        align-content: end;
+        display: flex;
+        display: flex;
+      }
+
+      .subtitle {
+        font-size: 0.9vmax;
+      }
+
+      & [data-icon] {
+        color: var(--accent-color);
+      }
+
+      & .subtitle-container {
+        color: var(--dark-textcolor);
+        display: flex;
+        gap: 0.3vmax;
+      }
+    }
+  }
+</style>
+
+<aside class='playlist-item' data-id={slug} data-color={color}>
+  <img src={image} alt={title} />
+  <div class='data'>
+    <strong class='title'>{title}</strong>
+    <div class='subtitle-container'>
+      {pinned && <PinnedIcon width='0.7vmax' color='springgreen' />}
+      <span class='subtitle'>{subtitle}</span>
+    </div>
+  </div>
+</aside>
