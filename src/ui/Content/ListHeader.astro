@@ -2,7 +2,6 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-
 <script type='module'>
   import { formatTime, convertToSeconds } from './modules/formatTime.js';
 
@@ -57,6 +56,12 @@ import { Icon } from 'astro-icon/components';
               background-image: url("./assets/favicon.webp");
               background-size: cover;
               border-radius: 50%;
+            }
+
+            .esconder {
+              @media (width <= 1111px) and (orientation: portrait) {
+                display: none;
+              }
             }
 
             & .info {
@@ -118,7 +123,6 @@ import { Icon } from 'astro-icon/components';
 
     connectedCallback() {
       this.render();
-
     }
 
     render() {
@@ -131,8 +135,8 @@ import { Icon } from 'astro-icon/components';
               <strong class="texting-strong">Lista</strong>
               <h1 class="texting-h1">MusicDev</h1>
               <div class="row">
-                <div class="avatar"></div>
-                <span class="info-subtitle">Spotimusic · 15 canciones,</span>
+                <div class="avatar esconder"></div>
+                <span class="info-subtitle esconder">Spotimusic · 15 canciones,</span>
                 <span class="total-duration">42 min de duración aproximadamente</span>
               </div>
             </div>

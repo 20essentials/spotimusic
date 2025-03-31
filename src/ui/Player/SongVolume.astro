@@ -13,6 +13,10 @@ import Volume from '@/icons/volume.astro';
     gap: 0.3vmax;
     align-items: center;
     align-content: center;
+
+    @media (width <= 1111px) and (orientation: portrait) {
+      display: none;
+    }
   }
 
   * {

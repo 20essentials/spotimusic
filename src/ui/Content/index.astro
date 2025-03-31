@@ -44,9 +44,12 @@ import ListHeader from './ListHeader.astro';
 
   .container::-webkit-scrollbar {
     width: 0.7vmax;
+
+    @media (width <= 1111px)  {
+      width: 0.4vmax;
+    }
   }
   .container::-webkit-scrollbar-thumb {
-    border-radius: var(--pad-gap) 0;
     background-color: #fff3;
     border-radius: 0 var(--pad-gap) var(--pad-gap) 0;
   }

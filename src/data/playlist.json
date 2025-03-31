@@ -38,5 +38,13 @@
     "pinned": true,
     "color": "#08d437",
     "whatColoris": "clearGreen"
+  },
+  {
+    "slug": "alternativerock",
+    "title": "Alternative Rock",
+    "subtitle": "Lista - Alternative Rock",
+    "pinned": true,
+    "color": "#ff0200",
+    "whatColoris": "red"
   }
 ]

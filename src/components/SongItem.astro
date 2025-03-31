@@ -34,6 +34,12 @@
           font-size:1vmax;
         }
 
+        .esconder {
+          @media (width <= 1111px) and (orientation: portrait) {
+            display: none;
+          }
+        }
+
         .title-container {
           display: flex;
           align-items: center;
@@ -109,8 +115,8 @@
               <div class="artist text">${this.artist}</div>
             </div>
           </div>
-          <div class="text">${this.album}</div>
-          <div class="text">${this.date.substring(0, 10)}</div>
+          <div class="text esconder">${this.album}</div>
+          <div class="text esconder">${this.date.substring(0, 10)}</div>
           <div class="text">${this.duration}</div>
         </div>
       `;
