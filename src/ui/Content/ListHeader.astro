@@ -1,6 +1,4 @@
----
-import { Icon } from 'astro-icon/components';
----
+<list-header></list-header>
 
 <script type='module'>
   import { formatTime, convertToSeconds } from './modules/formatTime.js';
@@ -9,6 +7,7 @@ import { Icon } from 'astro-icon/components';
     constructor() {
       super();
       this.attachShadow({ mode: 'open' });
+      this.currentIndex = 0;
     }
 
     static get styles() {
@@ -26,10 +25,49 @@ import { Icon } from 'astro-icon/components';
           }
         }
 
+        .container-anchors {
+          position: absolute;
+          top: 1.5vmax;
+          right: 1.5vmax;
+          display: flex;
+          gap: 0.5vmax;
+          
+          button {
+            width: 2.5vmax;
+            height: 2.5vmax;
+            border: none;
+            outline: none;
+            margin: 0;
+            padding: 0;
+            border-radius: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            place-content: center;
+            text-align: center;
+            cursor: pointer;
+            background: color-mix(in srgb, var(--theme-color) 50%, black 30%);
+            backdrop-filter: blur(5px);
+            transition: opacity .3s ease;
+
+            &:active {
+              opacity: 0.5;
+            }
+
+            img {
+              pointer-events: none;
+              --s-image: 1.9vmax;
+              width: var(--s-image);
+              height: var(--s-image);
+            }
+          }
+        }
+
         header {
           display: flex;
           flex-direction: column;
           padding: 0.5vmax;
+          position: relative;
+          
           
           & .data {
             display: flex;
@@ -126,6 +164,31 @@ import { Icon } from 'astro-icon/components';
 
     connectedCallback() {
       this.render();
+      const prev = this.shadowRoot.querySelector('.prev-list');
+      const next = this.shadowRoot.querySelector('.next-list');
+      const playlistItems = document.querySelectorAll('.playlist-item');
+      const slugs = [...playlistItems].map(playlist => playlist.dataset.id);
+      const { length } = playlistItems;
+
+      function clickOnPlaylist(targetIndex) {
+        const slug = slugs[targetIndex];
+        const theTarget = document.querySelector(
+          `.playlist-item[data-id="${slug}"]`
+        );
+        theTarget.click();
+      }
+
+      prev?.addEventListener('click', () => {
+        const prevIndex = (this.currentIndex - 1 + length) % length;
+        clickOnPlaylist(prevIndex);
+        this.currentIndex = prevIndex;
+      });
+
+      next?.addEventListener('click', () => {
+        const nextIndex = (this.currentIndex + 1) % length;
+        clickOnPlaylist(nextIndex);
+        this.currentIndex = nextIndex;
+      });
     }
 
     render() {
@@ -144,6 +207,14 @@ import { Icon } from 'astro-icon/components';
               </div>
             </div>
           </div>
+          <aside class="container-anchors">
+            <button class='prev-list' >
+              <img src='/assets/prev.svg' alt='prev' />
+            </button>
+            <button class='next-list' >
+              <img src='./assets/next.svg' alt='next' />
+            </button>
+          </aside>
         </header>
       `;
     }
@@ -151,5 +222,3 @@ import { Icon } from 'astro-icon/components';
 
   customElements.define('list-header', ListHeader);
 </script>
-
-<list-header> </list-header>

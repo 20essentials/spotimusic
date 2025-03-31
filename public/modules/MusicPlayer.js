@@ -114,8 +114,6 @@ export class MusicPlayer {
       const song = this.currentSong;
       if (!song || isNaN(song.duration)) return;
 
-      console.log(detail);
-
       const deltaSeconds = detail * song.duration;
       const targetCurrentTime = Math.max(
         0,
