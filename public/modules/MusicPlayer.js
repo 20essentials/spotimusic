@@ -1,6 +1,5 @@
 import { emitEvent } from './emitter.js';
 import { formatTime } from './formatTime.js';
-import { toggleVolumeIcon } from './ui/volume.js';
 import { togglePlayIcon } from './ui/play.js';
 import { shuffle } from './shuffle.js';
 import { MusicList } from './MusicList.js';
@@ -25,6 +24,7 @@ export class MusicPlayer {
   currentSong = new Audio();
   musicList = new MusicList();
   globalVolume = 1;
+  lastVolume = 1;
 
   constructor(playlistName = 'Electronic', id = 1) {
     this.musicList.get(playlistName).then(songs => {
@@ -71,6 +71,7 @@ export class MusicPlayer {
       const newValue = detail / 100;
       this.detectMuteUnmute(newValue);
       this.globalVolume = newValue;
+      this.lastVolume = newValue;
       this.updateVolume();
     });
 
@@ -78,21 +79,42 @@ export class MusicPlayer {
       const newValue = Math.max(0, Math.min(1, this.globalVolume + detail));
       this.detectMuteUnmute(newValue);
       this.globalVolume = newValue;
+      this.lastVolume = newValue;
       this.updateVolume();
     });
 
-    // document.addEventListener('song:slidetime', ({ detail }) => {
-    //   const percentage = (detail * 100 * this.currentSong.duration) / 100;
-    //   const targetCurrentTime = Math.max(
-    //     0,
-    //     Math.min(100, this.currentSong.currentTime + percentage)
-    //   )
-    //   this.currentSong.currentTime = targetCurrentTime;
-    // });
+    document.addEventListener('mutedByClick', ({ detail }) => {
+      const { muteado } = detail;
+      if (muteado) {
+        this.detectMuteUnmute(0);
+        this.globalVolume = 0;
+        this.updateVolume();
+        document.dispatchEvent(
+          new CustomEvent('volumeNewProgress', {
+            composed: true,
+            bubbles: true,
+            detail: { muteado, lastVolume: this.lastVolume }
+          })
+        );
+      } else {
+        this.detectMuteUnmute(this.lastVolume);
+        this.globalVolume = this.lastVolume;
+        this.updateVolume();
+        document.dispatchEvent(
+          new CustomEvent('volumeNewProgress', {
+            composed: true,
+            bubbles: true,
+            detail: { muteado, lastVolume: this.lastVolume }
+          })
+        );
+      }
+    });
 
     document.addEventListener('song:slidetime', ({ detail }) => {
       const song = this.currentSong;
       if (!song || isNaN(song.duration)) return;
+
+      console.log(detail);
 
       const deltaSeconds = detail * song.duration;
       const targetCurrentTime = Math.max(
@@ -120,11 +142,11 @@ export class MusicPlayer {
   }
 
   detectMuteUnmute(detail) {
-    // if (detail / 100 === 0 && this.globalVolume > 0) {
-    //   emitEvent('volume:mute', document, null);
-    // } else if (detail / 100 > 0 && this.globalVolume === 0) {
-    //   emitEvent('volume:unmute', document, null);
-    // }
+    if (detail / 100 === 0 && this.globalVolume > 0) {
+      emitEvent('volume:mute', document, null);
+    } else if (detail / 100 > 0 && this.globalVolume === 0) {
+      emitEvent('volume:unmute', document, null);
+    }
   }
 
   get isShuffle() {

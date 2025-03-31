@@ -1,57 +1,67 @@
 ---
+
 ---
-<script type="module">
-  import { MusicPlayer } from "./modules/MusicPlayer.js";
+
+<script type='module'>
+  import { MusicPlayer } from './modules/MusicPlayer.js';
 
   const getURLData = () => {
-    const anchor = new URL(location.href).hash.toLowerCase().substring(1) || "electronic-20";
-    const [playlistName, id] = anchor.split("-");
+    const anchor =
+      new URL(location.href).hash.toLowerCase().substring(1) || 'electronic-20';
+    const [playlistName, id] = anchor.split('-');
     return {
-      playlistName: playlistName ?? "electronic",
+      playlistName: playlistName ?? 'electronic',
       id: Number(id) ?? 20
-    }
-  }
+    };
+  };
 
   const { playlistName, id } = getURLData();
   const musicPlayer = new MusicPlayer(playlistName, id);
 
   const buttons = {
-    play: document.querySelector(".song-player-container .play"),
-    prev: document.querySelector(".song-player-container .prev"),
-    next: document.querySelector(".song-player-container .next"),
-    shuffle: document.querySelector(".song-player-container .shuffle"),
-    repeat: document.querySelector(".song-player-container .repeat")
-  }
+    play: document.querySelector('.song-player-container .play'),
+    prev: document.querySelector('.song-player-container .prev'),
+    next: document.querySelector('.song-player-container .next'),
+    shuffle: document.querySelector('.song-player-container .shuffle'),
+    repeat: document.querySelector('.song-player-container .repeat')
+  };
 
-  buttons.play.addEventListener("click", () => musicPlayer.play());
-  buttons.prev.addEventListener("click", () => musicPlayer.prev());
-  buttons.next.addEventListener("click", () => musicPlayer.next());
-  buttons.repeat.addEventListener("click", () => buttons.repeat.classList.toggle("disabled"));
-  buttons.shuffle.addEventListener("click", () => {
-    buttons.shuffle.classList.toggle("disabled");
+  buttons.play.addEventListener('click', () => musicPlayer.play());
+  buttons.prev.addEventListener('click', () => musicPlayer.prev());
+  buttons.next.addEventListener('click', () => musicPlayer.next());
+  buttons.repeat.addEventListener('click', () =>
+    buttons.repeat.classList.toggle('disabled')
+  );
+  buttons.shuffle.addEventListener('click', () => {
+    buttons.shuffle.classList.toggle('disabled');
     musicPlayer.sortSongs();
   });
 
-  /* Sidebar playlist */
-
-  const playlistItems = document.querySelectorAll(".playlist-item");
+  const playlistItems = document.querySelectorAll('.playlist-item');
   playlistItems.forEach(playlist => {
-    playlist.addEventListener("click", async () => {
+    playlist.addEventListener('click', async () => {
       const slug = playlist.dataset.id;
-      const title = playlist.querySelector(".title").textContent;
-      const songs = await musicPlayer.selectList(slug, title, playlist.dataset.color);
+      const title = playlist.querySelector('.title').textContent;
+      const songs = await musicPlayer.selectList(
+        slug,
+        title,
+        playlist.dataset.color
+      );
     });
   });
 
-  /* Songlist */
-  const songPlaylist = document.querySelector(".song.playlist");
-  songPlaylist.addEventListener("click", (ev) => {
+  const songPlaylist = document.querySelector('.song.playlist');
+  songPlaylist.addEventListener('click', ev => {
     const isClick = ev.detail === 1;
 
     if (isClick) {
-      const newSongs = [...document.querySelectorAll("song-item")].map(song => song.getData());
+      const newSongs = [...document.querySelectorAll('song-item')].map(song =>
+        song.getData()
+      );
       musicPlayer.setSongs(newSongs);
-      const rowItem = ev.composedPath().find(tag => tag.classList?.contains("row-item"));
+      const rowItem = ev
+        .composedPath()
+        .find(tag => tag.classList?.contains('row-item'));
       let id = Number(rowItem.dataset?.id);
 
       let newIndex = id;
@@ -65,6 +75,5 @@
         musicPlayer.togglePlayPause(true);
       }
     }
-
   });
 </script>

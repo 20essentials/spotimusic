@@ -97,6 +97,16 @@
         updateProgress(event);
       });
 
+      document.addEventListener('volumeNewProgress', ({ detail }) => {
+        if (this.id === 'current-song') return;
+        const { muteado, lastVolume } = detail;
+        if (muteado) {
+          this.setValue(0);
+        } else {
+          this.setValue(lastVolume * 100);
+        }
+      });
+
       document.addEventListener('mousemove', event => {
         if (!isDragging) return;
         updateProgress(event);
@@ -114,7 +124,6 @@
         this.id === 'current-song' &&
           emitEvent('song:changetime', this, percentage);
         this.id === 'volume' && emitEvent('volume:change', this, percentage);
-
         this.setValue(percentage);
       };
     }
