@@ -13,5 +13,8 @@
     "astro": "^4.9.2",
     "astro-icon": "^1.1.0",
     "colorthief": "^2.4.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
