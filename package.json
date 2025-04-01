@@ -5,11 +5,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && mv dist/_astro/* dist/ && rm -r dist/_astro",
     "preview": "astro preview",
     "astro": "astro"
   },
-  "homepage": ".",
+  "homepage": "",
   "dependencies": {
     "astro": "^4.9.2",
     "astro-icon": "^1.1.0",
