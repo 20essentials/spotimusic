@@ -46,6 +46,7 @@ export class MusicPlayer {
       this.updateList(songs);
       this.sendInfo({ autoplay: false });
     });
+    this.addMediaSessionEvents();
   }
 
   init() {
@@ -194,7 +195,70 @@ export class MusicPlayer {
     this.durationTag.textContent = this.songList[this.currentSongIndex].duration;
   }
 
+  updateMetadata({ title, artist, urlPoster }) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title,
+      artist,
+      artwork: [
+        {
+          src: urlPoster,
+          sizes: '128x128',
+          type: 'image/avif'
+        }
+      ]
+    });
+  }
+
+  addMediaSessionEvents() {
+    navigator.mediaSession.setActionHandler('play', () => {
+      this.currentSong.play();
+      this.togglePlayPause();
+      navigator.mediaSession.playbackState = 'playing';
+    });
+
+    navigator.mediaSession.setActionHandler('pause', () => {
+      this.currentSong.pause();
+      this.togglePlayPause();
+      navigator.mediaSession.playbackState = 'paused';
+    });
+
+    navigator.mediaSession.setActionHandler('seekbackward', details => {
+      this.currentSong.currentTime = Math.max(
+        this.currentSong.currentTime - 10,
+        0
+      );
+    });
+
+    navigator.mediaSession.setActionHandler('seekforward', details => {
+      this.currentSong.currentTime = Math.min(
+        this.currentSong.currentTime + 10,
+        this.currentSong.duration
+      );
+    });
+
+    navigator.mediaSession.setActionHandler('seekto', details => {
+      if (details.fastSeek && 'fastSeek' in this.currentSong) {
+        this.currentSong.fastSeek(details.seekTime);
+      } else {
+        this.currentSong.currentTime = details.seekTime;
+      }
+    });
+
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+      this.nextSong();
+    });
+
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+      this.prev();
+    });
+  }
+
   play() {
+    const song = this.songList[this.currentSongIndex];
+    const { title, artist, urlPoster } = song;
+    this.updateMetadata({ title, artist, urlPoster });
+    document.title = `${title} - ${artist}`;
+
     this.updateVolume();
     if (this.currentSong.paused) {
       const isResume = this.currentSong.currentTime < 1;
