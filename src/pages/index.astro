@@ -38,12 +38,17 @@ const title = 'SpotiMusic Player';
   .content-container {
     display: grid;
     grid-template-columns: 18% 1fr;
-    height: calc(100% - var(--player-height));
+    height: calc(100vh - var(--player-height));
     gap: var(--pad-gap);
+    overflow: hidden;
 
     @media (width <= 1111px) and (orientation: portrait) {
       grid-template-columns: 32% 1fr;
     }
+  }
+
+  .sidebar {
+    height: calc(100vh - var(--player-height) - 2vmax);
   }
 </style>
 

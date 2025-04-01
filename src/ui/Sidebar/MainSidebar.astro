@@ -15,7 +15,10 @@ const sortRule = (a: { pinned: boolean }) => (a.pinned ? -1 : 1);
   .playlist-container {
     font-family: var(--default-font);
     padding: 0.3vmax;
-    min-height: max-content;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--player-height) - 8vmax);
+    padding-bottom: 0;
 
     & .search-container {
       display: flex;
@@ -25,6 +28,8 @@ const sortRule = (a: { pinned: boolean }) => (a.pinned ? -1 : 1);
 
       .text {
         font-size: 0.8vmax;
+        padding-left: 0.4vmax;
+        margin-top: 0.5vmax;
       }
 
       & input[type='search'] {
@@ -45,14 +50,13 @@ const sortRule = (a: { pinned: boolean }) => (a.pinned ? -1 : 1);
     & .playlist {
       display: flex;
       flex-direction: column;
-      gap: 0 0.5rem;
       padding: 0 0.3vmax;
       overflow-y: scroll;
-      height: max-content;
+      max-height: 100%;
     }
 
     .playlist::-webkit-scrollbar {
-      width: 0.8vmin;
+      width: 0.4vmin;
     }
     .playlist::-webkit-scrollbar-thumb {
       background: #fff4;
@@ -67,7 +71,7 @@ const sortRule = (a: { pinned: boolean }) => (a.pinned ? -1 : 1);
 <div class='container'>
   <div class='playlist-container'>
     <div class='search-container'>
-      <span class='text'><List width='0.8vmax' color='#ddd' /> Listas</span>
+      <span class='text'><List width='0.8vmax' color='#ddd' /> Playlists</span>
     </div>
 
     <div class='playlist'>

@@ -2,7 +2,6 @@
   {
     "slug": "electronic",
     "title": "Electronic",
-    "subtitle": "Lista - Electronic",
     "pinned": true,
     "color": "#08d437",
     "whatColoris": "clearGreen"
@@ -10,7 +9,6 @@
   {
     "slug": "bluerock",
     "title": "Blue Rock",
-    "subtitle": "Lista - Blue Rock",
     "pinned": true,
     "color": "#f007c3",
     "whatColoris": "rosado"
@@ -18,7 +16,6 @@
   {
     "slug": "englishpop",
     "title": "English Pop",
-    "subtitle": "Lista - English Pop",
     "pinned": true,
     "color": "#dccf08",
     "whatColoris": "amarillo"
@@ -26,7 +23,6 @@
   {
     "slug": "melodicrock",
     "title": "Melodic Rock",
-    "subtitle": "Lista - Melodic Rock",
     "pinned": true,
     "color": "#2ab240",
     "whatColoris": "verde"
@@ -34,7 +30,6 @@
   {
     "slug": "progressivepop",
     "title": "Progressive Pop",
-    "subtitle": "Lista - Progressive Pop",
     "pinned": true,
     "color": "#9708ef",
     "whatColoris": "purpura"
@@ -42,15 +37,13 @@
   {
     "slug": "alternativerock",
     "title": "Alternative Rock",
-    "subtitle": "Lista - Alternative Rock",
     "pinned": true,
     "color": "#ff0200",
     "whatColoris": "red"
   },
   {
-    "slug": "instrumentalmusic",
+    "slug": "instrumental",
     "title": "Instrumental",
-    "subtitle": "Lista - Instrumental",
     "pinned": true,
     "color": "#0dbce7",
     "whatColoris": "celeste"

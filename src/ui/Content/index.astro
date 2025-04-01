@@ -13,8 +13,9 @@ import ListHeader from './ListHeader.astro';
       var(--dark-theme-color) 60%
     );
     border-radius: var(--border-radius);
-    max-height: calc(100vh - var(--player-height) - (var(--pad-gap) * 2));
+    max-height: calc(100vh - var(--player-height) - 2vmax);
     overflow-y: scroll;
+    height: 100%;
 
     &::before {
       content: '';
@@ -45,8 +46,11 @@ import ListHeader from './ListHeader.astro';
   .container::-webkit-scrollbar {
     width: 0.7vmax;
 
-    @media (width <= 1111px)  {
+    @media (width <= 1111px) {
       width: 0.4vmax;
+    }
+    @media (width <= 1111px) and (orientation: portrait) {
+      width: 0.2vmax;
     }
   }
   .container::-webkit-scrollbar-thumb {

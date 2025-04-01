@@ -1,7 +1,12 @@
 ---
-// import { Icon } from 'astro-icon/components';
 import PinnedIcon from '@/icons/pinned.astro';
-const { slug, title, subtitle, pinned, color } = Astro.props;
+const { slug, title, pinned, color } = Astro.props;
+
+const initialLetterOfEachWord = title
+  .split(/\s+/)
+  .map((palabra: string) => palabra.charAt(0))
+  .join('')
+  .toUpperCase();
 
 type SongData = {
   urlPoster: string;
@@ -28,6 +33,7 @@ const image = randomSrc;
     gap: 0.5vmax;
     border-radius: 8px;
     height: max-content;
+    padding-inline: 0.7vmax;
 
     @media (width <= 1111px) {
       border-radius: calc(var(--pad-gap) / 2);
@@ -82,7 +88,7 @@ const image = randomSrc;
     <strong class='title'>{title}</strong>
     <div class='subtitle-container'>
       {pinned && <PinnedIcon width='0.7vmax' color='springgreen' />}
-      <span class='subtitle'>{subtitle}</span>
+      <span class='subtitle'>Playlist - {initialLetterOfEachWord}</span>
     </div>
   </div>
 </aside>
