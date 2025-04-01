@@ -46,5 +46,13 @@
     "pinned": true,
     "color": "#ff0200",
     "whatColoris": "red"
+  },
+  {
+    "slug": "instrumental",
+    "title": "Instrumental",
+    "subtitle": "Lista - Instrumental",
+    "pinned": true,
+    "color": "#0dbce7",
+    "whatColoris": "celeste"
   }
 ]
