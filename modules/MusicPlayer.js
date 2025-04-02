@@ -35,7 +35,7 @@ export class MusicPlayer {
 
       this.selectList(playlistName, title, color, imgSrc);
 
-      const [currentTimeTag, durationTag] = document.querySelectorAll(
+      const [_, durationTag] = document.querySelectorAll(
         '.song-player-container time'
       );
       this.durationTag = durationTag;
@@ -45,6 +45,8 @@ export class MusicPlayer {
       this.init();
       this.updateList(songs);
       this.sendInfo({ autoplay: false });
+      this.lastPlaylistItemClicked = null;
+      this.lastSongItemClicked = null;
     });
     this.addMediaSessionEvents();
   }
@@ -195,7 +197,7 @@ export class MusicPlayer {
     this.durationTag.textContent = this.songList[this.currentSongIndex].duration;
   }
 
-  updateMetadata({ title, artist, urlPoster }) {
+  updateMetadata({ title, artist, urlPoster, urlSong, album }) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title,
       artist,
@@ -207,6 +209,28 @@ export class MusicPlayer {
         }
       ]
     });
+    this.currentSong.src = urlSong;
+
+    //Playlist Item
+    const lowerCaseAndAlong = album
+      .split(' ')
+      .map(w => w.toLowerCase())
+      .join('');
+    const currentPlaylistButton = document.querySelector(
+      `.playlist-item[data-id=${lowerCaseAndAlong}]`
+    );
+    this.lastPlaylistItemClicked?.classList.remove('title-green');
+    currentPlaylistButton.classList.add('title-green');
+    this.lastPlaylistItemClicked = currentPlaylistButton;
+
+    //Song Item
+    const SongItem = document.querySelector(
+      `song-item[title="${CSS.escape(title)}"][artist="${CSS.escape(artist)}"]`
+    );
+    const $row = SongItem.shadowRoot.querySelector('.row-item');
+    this.lastSongItemClicked?.classList.remove('title-green')
+    $row.classList.add('title-green');
+    this.lastSongItemClicked = $row;
   }
 
   addMediaSessionEvents() {
@@ -255,8 +279,8 @@ export class MusicPlayer {
 
   play() {
     const song = this.songList[this.currentSongIndex];
-    const { title, artist, urlPoster } = song;
-    this.updateMetadata({ title, artist, urlPoster });
+    const { title, artist, urlPoster, urlSong, album } = song;
+    this.updateMetadata({ title, artist, urlPoster, urlSong, album });
     document.title = `${title} - ${artist}`;
 
     this.updateVolume();
