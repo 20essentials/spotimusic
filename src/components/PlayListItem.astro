@@ -1,5 +1,6 @@
 ---
 import PinnedIcon from '@/icons/pinned.astro';
+import Volume from '@/icons/volume.astro';
 const { slug, title, pinned, color } = Astro.props;
 
 const initialLetterOfEachWord = title
@@ -34,6 +35,28 @@ const image = randomSrc;
     border-radius: 8px;
     height: max-content;
     padding-inline: 0.7vmax;
+    position: relative;
+
+    &.title-green {
+      .title {
+        color: var(--theme-color);
+        filter: brightness(150%);
+      }
+
+      @media (width >= 1111px) {
+        .volume-icon {
+          display: flex;
+        }
+      }
+    }
+
+    .volume-icon {
+      width: 1.1vmax;
+      position: absolute;
+      right: 1vmax;
+      display: none;
+      color: var(--theme-color);
+    }
 
     @media (width <= 1111px) {
       border-radius: calc(var(--pad-gap) / 2);
@@ -61,7 +84,6 @@ const image = randomSrc;
         font-weight: 400;
         font-size: 1vmax;
         align-content: end;
-        display: flex;
         display: flex;
       }
 
@@ -91,4 +113,5 @@ const image = randomSrc;
       <span class='subtitle'>Playlist - {initialLetterOfEachWord}</span>
     </div>
   </div>
+  <Volume class='volume-icon' />
 </aside>
