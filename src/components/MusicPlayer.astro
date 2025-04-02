@@ -1,17 +1,16 @@
 <script type='module'>
   import { MusicPlayer } from './modules/MusicPlayer.js';
-
-  const getURLData = () => {
-    const anchor =
-      new URL(location.href).hash.toLowerCase().substring(1) || 'electronic-20';
-    const [playlistName, id] = anchor.split('-');
-    return {
-      playlistName: playlistName ?? 'electronic',
-      id: Number(id) ?? 20
-    };
-  };
-
-  const { playlistName, id } = getURLData();
+  import NamesOfPlaylists from './data/playlist.json' with { type: 'json' };
+  const allSlugs = NamesOfPlaylists.map(({ slug }) => slug);
+  const randomSlug = ~~(Math.random() * allSlugs.length);
+  const slug = allSlugs[randomSlug];
+  const playlistCorriente = await import(`./data/${slug}.json`, {
+    with: { type: "json" },
+  });
+  const playlistCorrienteJson = playlistCorriente.default;
+  const randonNumSong = ~~(Math.random() * playlistCorrienteJson.length);
+  const playlistName = slug;
+  const id = randonNumSong + 1;
   const musicPlayer = new MusicPlayer(playlistName, id);
 
   const buttons = {

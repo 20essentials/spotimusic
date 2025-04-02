@@ -1,7 +1,6 @@
 ---
-const title = 'Scribble';
-const artist = 'Underworld';
-const imageRandom = './assets/transparent.png';
+  const title = '';
+  const artist = '';
 ---
 
 <style>
@@ -51,6 +50,7 @@ const imageRandom = './assets/transparent.png';
       songData: { title, artist, urlPoster, slug, album },
       autoplay
     } = detail;
+    
 
     const container = document.querySelector('.song-info-container');
     const titleTag = container.querySelector('.title');
@@ -68,7 +68,7 @@ const imageRandom = './assets/transparent.png';
 </script>
 
 <div class='song-info-container'>
-  <img src={imageRandom} class='left' />
+  <img src='./assets/transparent.png' class='left' />
   <div class='right'>
     <p class='title'>{title}</p>
     <p class='artist'>{artist}</p>

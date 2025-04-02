@@ -45,6 +45,8 @@ export class MusicPlayer {
       this.init();
       this.updateList(songs);
       this.sendInfo({ autoplay: false });
+      this.lastPlaylistItemClicked = null;
+      this.lastSongItemClicked = null;
     });
     this.addMediaSessionEvents();
   }
@@ -217,20 +219,18 @@ export class MusicPlayer {
     const currentPlaylistButton = document.querySelector(
       `.playlist-item[data-id=${lowerCaseAndAlong}]`
     );
-    document
-      .querySelectorAll('.title-green')
-      .forEach(el => el.classList.remove('title-green'));
+    this.lastPlaylistItemClicked?.classList.remove('title-green');
     currentPlaylistButton.classList.add('title-green');
-
+    this.lastPlaylistItemClicked = currentPlaylistButton;
 
     //Song Item
-    const AllSongsItem = document.querySelectorAll('song-item')
-    AllSongsItem.forEach(container => container.shadowRoot.querySelector('.row-item').classList.remove('title-green'))
     const SongItem = document.querySelector(
       `song-item[title="${CSS.escape(title)}"][artist="${CSS.escape(artist)}"]`
     );
     const $row = SongItem.shadowRoot.querySelector('.row-item');
+    this.lastSongItemClicked?.classList.remove('title-green')
     $row.classList.add('title-green');
+    this.lastSongItemClicked = $row;
   }
 
   addMediaSessionEvents() {
