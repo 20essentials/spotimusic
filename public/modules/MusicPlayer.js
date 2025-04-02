@@ -35,7 +35,7 @@ export class MusicPlayer {
 
       this.selectList(playlistName, title, color, imgSrc);
 
-      const [currentTimeTag, durationTag] = document.querySelectorAll(
+      const [_, durationTag] = document.querySelectorAll(
         '.song-player-container time'
       );
       this.durationTag = durationTag;
@@ -195,7 +195,7 @@ export class MusicPlayer {
     this.durationTag.textContent = this.songList[this.currentSongIndex].duration;
   }
 
-  updateMetadata({ title, artist, urlPoster }) {
+  updateMetadata({ title, artist, urlPoster, urlSong }) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title,
       artist,
@@ -207,6 +207,7 @@ export class MusicPlayer {
         }
       ]
     });
+    this.currentSong.src = urlSong;
   }
 
   addMediaSessionEvents() {
@@ -255,8 +256,8 @@ export class MusicPlayer {
 
   play() {
     const song = this.songList[this.currentSongIndex];
-    const { title, artist, urlPoster } = song;
-    this.updateMetadata({ title, artist, urlPoster });
+    const { title, artist, urlPoster, urlSong } = song;
+    this.updateMetadata({ title, artist, urlPoster, urlSong });
     document.title = `${title} - ${artist}`;
 
     this.updateVolume();

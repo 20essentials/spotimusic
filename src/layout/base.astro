@@ -28,7 +28,7 @@ import '@/styles/globalStyles.css';
     --dark-bgcolor: #000;
     --border-radius: 1vmax;
 
-    --theme-color: #f007c3;
+    --theme-color: #08d437;
 
     --light-textcolor: #fff;
     --dark-textcolor: #c6c2be;
@@ -49,12 +49,21 @@ import '@/styles/globalStyles.css';
 
   html {
     color-scheme: dark;
+
+    @media (width <= 1111px) {
+      scrollbar-width: thin;
+    }
   }
 
   body {
     width: 100%;
     height: 100vh;
     position: relative;
+    overflow: hidden;
+
+    @media (width <= 1111px) {
+      overflow-y: auto;
+    }
   }
 </style>
 

@@ -2,8 +2,6 @@
 import playlist from '@/data/playlist.json';
 import PlayListItem from '@/components/PlayListItem.astro';
 import List from '@/icons/list.astro';
-
-const sortRule = (a: { pinned: boolean }) => (a.pinned ? -1 : 1);
 ---
 
 <style>
@@ -75,7 +73,11 @@ const sortRule = (a: { pinned: boolean }) => (a.pinned ? -1 : 1);
     </div>
 
     <div class='playlist'>
-      {playlist.sort(a => sortRule(a)).map(pItem => <PlayListItem {...pItem} />)}
+      {
+        playlist
+          .sort((a, b) => a.slug.localeCompare(b.slug))
+          .map(pItem => <PlayListItem {...pItem} />)
+      }
     </div>
   </div>
 </div>

@@ -47,5 +47,12 @@
     "pinned": true,
     "color": "#0dbce7",
     "whatColoris": "celeste"
+  },
+  {
+    "slug": "spanishpop",
+    "title": "Spanish Pop",
+    "pinned": true,
+    "color": "#52e2d5",
+    "whatColoris": "aqua verde"
   }
 ]
