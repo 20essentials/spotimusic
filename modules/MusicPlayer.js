@@ -220,7 +220,7 @@ export class MusicPlayer {
       `.playlist-item[data-id=${lowerCaseAndAlong}]`
     );
     this.lastPlaylistItemClicked?.classList.remove('title-green');
-    currentPlaylistButton.classList.add('title-green');
+    currentPlaylistButton?.classList.add('title-green');
     this.lastPlaylistItemClicked = currentPlaylistButton;
 
     //Song Item
@@ -229,7 +229,7 @@ export class MusicPlayer {
     );
     const $row = SongItem.shadowRoot.querySelector('.row-item');
     this.lastSongItemClicked?.classList.remove('title-green')
-    $row.classList.add('title-green');
+    $row.classList?.add('title-green');
     this.lastSongItemClicked = $row;
   }
 
