@@ -54,5 +54,12 @@
     "pinned": true,
     "color": "#52e2d5",
     "whatColoris": "aqua verde"
+  },
+  {
+    "slug": "eurodance",
+    "title": "Eurodance",
+    "pinned": true,
+    "color": "#FFA500",
+    "whatColoris": "orange"
   }
 ]
