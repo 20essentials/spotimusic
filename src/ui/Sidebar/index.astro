@@ -1,5 +1,7 @@
 ---
-import MainSidebar from './MainSidebar.astro';
+import playlist from '@/data/playlist.json';
+import PlayListItem from '@/components/PlayListItem.astro';
+import List from '@/icons/list.astro';
 ---
 
 <style>
@@ -8,7 +10,7 @@ import MainSidebar from './MainSidebar.astro';
     flex-direction: column;
     height: 100%;
     gap: var(--pad-gap) 0;
-    max-height: calc(100vh - var(--player-height) );
+    max-height: calc(100vh - var(--player-height));
   }
 
   .top-sidebar {
@@ -55,6 +57,7 @@ import MainSidebar from './MainSidebar.astro';
         border-radius: 50%;
         filter: blur(0.5vmax);
         transition: all 0.5s ease;
+        pointer-events: none;
       }
 
       &::before {
@@ -95,16 +98,118 @@ import MainSidebar from './MainSidebar.astro';
     background: var(--medium-bgcolor);
     border-radius: var(--border-radius);
     height: 100%;
+
+    .the-container {
+      display: flex;
+      flex-direction: column;
+
+      .playlist-container {
+        font-family: var(--default-font);
+        padding: 0.3vmax;
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - var(--player-height) - 8vmax);
+        padding-bottom: 0;
+
+        & .search-container {
+          display: flex;
+          align-items: center;
+          padding: 0.5vmax;
+          padding-left: 0.8vmax;
+
+          .text {
+            font-size: 0.8vmax;
+            padding-left: 0.4vmax;
+            margin-top: 0.5vmax;
+          }
+
+          & input[type='search'] {
+            border: 0;
+            background: transparent;
+            padding: 0.4rem 0;
+            margin: 0 0.5rem;
+            width: 150px;
+          }
+
+          & > span {
+            display: flex;
+            align-items: center;
+            gap: 0.3vmax;
+          }
+        }
+
+        & .playlist {
+          display: flex;
+          flex-direction: column;
+          padding: 0 0.3vmax;
+          overflow-y: scroll;
+          max-height: 100%;
+        }
+
+        .playlist::-webkit-scrollbar {
+          width: 0.4vmin;
+        }
+        .playlist::-webkit-scrollbar-thumb {
+          background: #fff4;
+          border-radius: 0 var(--pad-gap) var(--pad-gap) 0;
+        }
+        .playlist::-webkit-scrollbar-track {
+          background: transparent;
+        }
+      }
+    }
   }
 </style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('search-input');
+    const playlistContainer = document.querySelector('.sidebarPlaylist');
+    const originalPlaylists = [...playlistContainer.children];
+
+    input.addEventListener('input', () => {
+      const searchTerm = input.value.toLowerCase();
+
+      const sortedPlaylists = [...originalPlaylists].sort((a, b) => {
+        const aText = a.textContent.toLowerCase();
+        const bText = b.textContent.toLowerCase();
+
+        const aMatch = aText.includes(searchTerm);
+        const bMatch = bText.includes(searchTerm);
+
+        if (aMatch && !bMatch) return -1;
+        if (!aMatch && bMatch) return 1;
+        return aText.localeCompare(bText);
+      });
+
+      playlistContainer.innerHTML = '';
+      sortedPlaylists.forEach(item => playlistContainer.appendChild(item));
+    });
+  });
+</script>
 
 <div class='container'>
   <div class='top-sidebar'>
     <button class='btn'>
-      <input type='text' maxlength='15' placeholder='Seach' />
+      <input id='search-input' type='text' maxlength='15' placeholder='Seach' />
     </button>
   </div>
   <div class='main-sidebar'>
-    <MainSidebar />
+    <section class='the-container'>
+      <div class='playlist-container'>
+        <div class='search-container'>
+          <span class='text'><List width='0.8vmax' color='#ddd' /> Playlists</span
+          >
+        </div>
+
+        <div class='playlist sidebarPlaylist'>
+          {
+            playlist
+              .sort((a, b) => a.slug.localeCompare(b.slug))
+              .map(pItem => <PlayListItem {...pItem} />)
+          }
+        </div>
+      </div>
+    </section>
   </div>
 </div>
