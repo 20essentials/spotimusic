@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && mv dist/_astro/* dist/ && rm -r dist/_astro",
+    "whatMeansTheCommand_build": "echo 'Este comando copia los datos, construye el proyecto con Astro y reorganiza los archivos de salida eliminando la carpeta _astro.'",
+    "build": "npm run copy-data && astro build && mv dist/_astro/* dist/ && rm -r dist/_astro",
     "copy-data": "cp -r src/data public/",
     "preview": "astro preview",
     "astro": "astro"

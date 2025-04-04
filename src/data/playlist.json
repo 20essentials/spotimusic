@@ -61,5 +61,12 @@
     "pinned": true,
     "color": "#FFA500",
     "whatColoris": "orange"
+  },
+  {
+    "slug": "bluepop",
+    "title": "Blue Pop",
+    "pinned": true,
+    "color": "#0000ff",
+    "whatColoris": "blue"
   }
 ]
