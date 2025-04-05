@@ -84,7 +84,7 @@
               outline: 0.15vmax var(--theme-color) solid;
 
               @media (width <= 1111px) and (orientation: portrait) {
-                width: calc(var(--size) + 1.5vmax);
+                --size: 13vmax;
               }
 
               * {
@@ -204,9 +204,9 @@
 
       this.shadowRoot.querySelector('h1').textContent = title;
       this.shadowRoot.querySelector('.info-subtitle').textContent =
-        `Spotimusic · ${total} canciones,`;
+        `Spotimusic · ${total} songs,`;
       this.shadowRoot.querySelector('.total-duration').textContent =
-        `${time} de duración aproximadamente`;
+        `${time} of duration approximately`;
 
       setTimeout(() => {
         const result = `.playlist-item[data-id=${slug}] img`;

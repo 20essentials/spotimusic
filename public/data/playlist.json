@@ -66,7 +66,14 @@
     "slug": "bluepop",
     "title": "Blue Pop",
     "pinned": true,
-    "color": "#0000ff",
+    "color": "#2929dc",
     "whatColoris": "blue"
+  },
+  {
+    "slug": "romantic",
+    "title": "Romantic",
+    "pinned": true,
+    "color": "#f5576c",
+    "whatColoris": "rosado rojizo"
   }
 ]

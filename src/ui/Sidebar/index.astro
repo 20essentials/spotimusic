@@ -34,6 +34,10 @@ import List from '@/icons/list.astro';
       cursor: pointer;
       padding: 0.3vmax;
 
+      @media (width <= 1111px) {
+        background-color: transparent;
+      }
+
       input {
         position: absolute;
         inset: 0;
@@ -191,7 +195,7 @@ import List from '@/icons/list.astro';
 <div class='container'>
   <div class='top-sidebar'>
     <button class='btn'>
-      <input id='search-input' type='text' maxlength='15' placeholder='Seach' />
+      <input spellcheck="false" autocomplete="off" id='search-input' type='text' maxlength='15' placeholder='Seach' />
     </button>
   </div>
   <div class='main-sidebar'>

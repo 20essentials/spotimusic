@@ -227,8 +227,10 @@ export class MusicPlayer {
     const SongItem = document.querySelector(
       `song-item[title="${CSS.escape(title)}"][artist="${CSS.escape(artist)}"]`
     );
-    const $row = SongItem.shadowRoot.querySelector('.row-item');
-    this.lastSongItemClicked?.classList.remove('title-green')
+    if (!SongItem) return;
+    const $row = SongItem.shadowRoot?.querySelector('.row-item');
+
+    this.lastSongItemClicked?.classList.remove('title-green');
     $row.classList?.add('title-green');
     this.lastSongItemClicked = $row;
   }
