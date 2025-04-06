@@ -215,7 +215,8 @@ export class MusicPlayer {
     const lowerCaseAndAlong = album
       .split(' ')
       .map(w => w.toLowerCase())
-      .join('');
+      .join('')
+      .replaceAll(/-/g, '');
     const currentPlaylistButton = document.querySelector(
       `.playlist-item[data-id=${lowerCaseAndAlong}]`
     );

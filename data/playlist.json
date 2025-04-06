@@ -75,5 +75,12 @@
     "pinned": true,
     "color": "#f5576c",
     "whatColoris": "rosado rojizo"
+  },
+  {
+    "slug": "avantgarde",
+    "title": "Avant Garde",
+    "pinned": true,
+    "color": "#e0c3fc",
+    "whatColoris": "morado claro"
   }
 ]
