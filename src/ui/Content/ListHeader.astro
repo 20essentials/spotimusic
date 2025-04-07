@@ -257,6 +257,18 @@
         clickOnPlaylist(nextIndex);
         this.currentIndex = nextIndex;
       });
+
+      document.addEventListener('keydown', ({ key }) => {
+        if (key === 'ArrowRight' || key === 'D' || key === 'd') {
+          const nextIndex = (this.currentIndex + 1) % length;
+          clickOnPlaylist(nextIndex);
+          this.currentIndex = nextIndex;
+        } else if (key === 'ArrowLeft' || key === 'A' || key === 'a') {
+          const prevIndex = (this.currentIndex - 1 + length) % length;
+          clickOnPlaylist(prevIndex);
+          this.currentIndex = prevIndex;
+        }
+      });
     }
 
     render() {
