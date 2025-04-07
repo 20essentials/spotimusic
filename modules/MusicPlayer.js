@@ -209,7 +209,6 @@ export class MusicPlayer {
         }
       ]
     });
-    this.currentSong.src = urlSong;
 
     //Playlist Item
     const lowerCaseAndAlong = album

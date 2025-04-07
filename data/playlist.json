@@ -82,5 +82,12 @@
     "pinned": true,
     "color": "#e0c3fc",
     "whatColoris": "morado claro"
+  },
+  {
+    "slug": "synthwave",
+    "title": "Synthwave",
+    "pinned": true,
+    "color": "#94f15b",
+    "whatColoris": "verde lima claro"
   }
 ]
