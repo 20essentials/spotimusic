@@ -30,6 +30,7 @@
   buttons.shuffle.addEventListener('click', () => {
     buttons.shuffle.classList.toggle('disabled');
     musicPlayer.sortSongs();
+    
   });
 
   setTimeout(() => {
@@ -73,7 +74,6 @@
         .composedPath()
         .find(tag => tag.classList?.contains('row-item'));
       let id = Number(rowItem.dataset?.id);
-
       let newIndex = id;
       if (musicPlayer.isShuffle) {
         newIndex = musicPlayer.songList.findIndex(song => song.index === id);

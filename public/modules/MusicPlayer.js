@@ -25,6 +25,7 @@ export class MusicPlayer {
   musicList = new MusicList();
   globalVolume = 1;
   lastVolume = 1;
+  originalPlaylist = [];
 
   constructor(playlistName = 'Electronic', id = 1) {
     this.musicList.get(playlistName).then(songs => {
@@ -176,17 +177,23 @@ export class MusicPlayer {
 
   setSongs(songs) {
     this.songList = songs.map((song, index) => ({ ...song, index }));
+    this.originalPlaylist = structuredClone(this.songList);
     if (this.isShuffle) this.sortSongs();
   }
 
   sortSongs() {
-    if (this.isShuffle) {
-      this.songList = shuffle(this.songList);
-    } else {
-      const newIndex = this.songList[this.currentSongIndex].index;
-      this.songList = this.songList.sort((a, b) => a.index - b.index);
-      this.currentSongIndex = newIndex;
-    }
+    setTimeout(() => {
+      if (this.isShuffle) {
+        this.songList = shuffle(this.songList);
+        this.currentSongIndex = this.songList.findIndex(
+          ({ index }) => index === this.currentSongIndex
+        );
+      } else {
+        this.songList = structuredClone(this.originalPlaylist);
+        this.originalPlaylist = structuredClone(this.songList);
+        this.currentSongIndex = Number(this.currentSong.dataset.index);
+      }
+    }, 100);
   }
 
   prepare(index) {
@@ -194,6 +201,7 @@ export class MusicPlayer {
     this.currentSongIndex = index;
     const song = this.songList[this.currentSongIndex];
     this.currentSong.src = song.urlSong;
+    this.currentSong.setAttribute('data-index', song.index);
     this.durationTag.textContent = this.songList[this.currentSongIndex].duration;
   }
 
@@ -238,7 +246,7 @@ export class MusicPlayer {
       ]
     });
 
-    this.updateItemClicked({ ButtonTitle: title, artist, album })
+    this.updateItemClicked({ ButtonTitle: title, artist, album });
   }
 
   addMediaSessionEvents() {
@@ -353,7 +361,7 @@ export class MusicPlayer {
 
   prev() {
     const index =
-      this.currentSongIndex - 1 <= 0
+      this.currentSongIndex - 1 < 0
         ? this.songList.length - 1
         : this.currentSongIndex - 1;
     this.prepare(index);
