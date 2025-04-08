@@ -259,11 +259,11 @@
       });
 
       document.addEventListener('keydown', ({ key }) => {
-        if (key === 'ArrowRight' || key === 'D' || key === 'd') {
+        if (key === 'ArrowRight') {
           const nextIndex = (this.currentIndex + 1) % length;
           clickOnPlaylist(nextIndex);
           this.currentIndex = nextIndex;
-        } else if (key === 'ArrowLeft' || key === 'A' || key === 'a') {
+        } else if (key === 'ArrowLeft') {
           const prevIndex = (this.currentIndex - 1 + length) % length;
           clickOnPlaylist(prevIndex);
           this.currentIndex = prevIndex;

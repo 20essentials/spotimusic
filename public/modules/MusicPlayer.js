@@ -197,19 +197,7 @@ export class MusicPlayer {
     this.durationTag.textContent = this.songList[this.currentSongIndex].duration;
   }
 
-  updateMetadata({ title, artist, urlPoster, urlSong, album }) {
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title,
-      artist,
-      artwork: [
-        {
-          src: urlPoster,
-          sizes: '128x128',
-          type: 'image/avif'
-        }
-      ]
-    });
-
+  updateItemClicked({ ButtonTitle, artist, album }) {
     //Playlist Item
     const lowerCaseAndAlong = album
       .split(' ')
@@ -225,7 +213,9 @@ export class MusicPlayer {
 
     //Song Item
     const SongItem = document.querySelector(
-      `song-item[title="${CSS.escape(title)}"][artist="${CSS.escape(artist)}"]`
+      `song-item[title="${CSS.escape(ButtonTitle)}"][artist="${CSS.escape(
+        artist
+      )}"]`
     );
     if (!SongItem) return;
     const $row = SongItem.shadowRoot?.querySelector('.row-item');
@@ -233,6 +223,22 @@ export class MusicPlayer {
     this.lastSongItemClicked?.classList.remove('title-green');
     $row.classList?.add('title-green');
     this.lastSongItemClicked = $row;
+  }
+
+  updateMetadata({ title, artist, urlPoster, album }) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title,
+      artist,
+      artwork: [
+        {
+          src: urlPoster,
+          sizes: '128x128',
+          type: 'image/avif'
+        }
+      ]
+    });
+
+    this.updateItemClicked({ ButtonTitle: title, artist, album })
   }
 
   addMediaSessionEvents() {
@@ -279,10 +285,14 @@ export class MusicPlayer {
     });
   }
 
+  getInfoSong() {
+    return this.songList[this.currentSongIndex];
+  }
+
   play() {
     const song = this.songList[this.currentSongIndex];
     const { title, artist, urlPoster, urlSong, album } = song;
-    this.updateMetadata({ title, artist, urlPoster, urlSong, album });
+    this.updateMetadata({ title, artist, urlPoster, album });
     document.title = `${title} - ${artist}`;
 
     this.updateVolume();

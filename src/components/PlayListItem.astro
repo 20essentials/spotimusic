@@ -34,8 +34,10 @@ const image = randomSrc;
     gap: 0.5vmax;
     border-radius: 8px;
     height: max-content;
-    padding-inline: 0.7vmax;
+    padding-inline: 0.6vmax;
     position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 
     &.title-green {
       .title {
@@ -63,9 +65,20 @@ const image = randomSrc;
       border-radius: calc(var(--pad-gap) / 2);
     }
 
-    &:hover {
-      background: var(--light-bgcolor);
-      cursor: pointer;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover,
+      &.playlist-item-active {
+        background-color: var(--light-bgcolor);
+      }
+    }
+
+    &.playlist-item-active {
+      background-color: var(--light-bgcolor);
+    }
+
+    &:hover,
+    &.playlist-item-active {
+      background-color: var(--light-bgcolor);
     }
 
     & img {

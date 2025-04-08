@@ -89,5 +89,12 @@
     "pinned": true,
     "color": "#94f15b",
     "whatColoris": "verde lima claro"
+  },
+  {
+    "slug": "electropop",
+    "title": "Electro Pop",
+    "pinned": true,
+    "color": "#7d1fe9",
+    "whatColoris": "morado oscuro"
   }
 ]

@@ -5,7 +5,7 @@
   const randomSlug = ~~(Math.random() * allSlugs.length);
   const slug = allSlugs[randomSlug];
   const playlistCorriente = await import(`./data/${slug}.json`, {
-    with: { type: "json" },
+    with: { type: 'json' }
   });
   const playlistCorrienteJson = playlistCorriente.default;
   const randonNumSong = ~~(Math.random() * playlistCorrienteJson.length);
@@ -32,11 +32,26 @@
     musicPlayer.sortSongs();
   });
 
+  setTimeout(() => {
+    let { title: ButtonTitle, artist, album } = musicPlayer.getInfoSong();
+    musicPlayer.updateItemClicked({ ButtonTitle, artist, album });
+    document.querySelector('.title-green').classList.add('playlist-item-active')
+  }, 50);
+
   const playlistItems = document.querySelectorAll('.playlist-item');
   playlistItems.forEach(playlist => {
     playlist.addEventListener('click', async () => {
       const slug = playlist.dataset.id;
-      const title = playlist.querySelector('.title').textContent;
+      let title = playlist.querySelector('.title').textContent;
+
+      document.querySelectorAll('.playlist-item-active').forEach(el => el.classList.remove('playlist-item-active'))
+      playlist.classList.add('playlist-item-active');
+
+      setTimeout(() => {
+        const { title: ButtonTitle, artist, album } = musicPlayer.getInfoSong();
+        musicPlayer.updateItemClicked({ ButtonTitle, artist, album });
+      }, 300);
+
       const songs = await musicPlayer.selectList(
         slug,
         title,
