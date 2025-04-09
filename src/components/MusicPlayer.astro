@@ -53,11 +53,12 @@
         musicPlayer.updateItemClicked({ ButtonTitle, artist, album });
       }, 300);
 
-      const songs = await musicPlayer.selectList(
+      await musicPlayer.selectList(
         slug,
         title,
         playlist.dataset.color
       );
+
     });
   });
 

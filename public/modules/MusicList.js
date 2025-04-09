@@ -46,8 +46,11 @@ export class MusicList {
       const lists = [
         ...document.querySelectorAll('.main-sidebar .playlist .playlist-item')
       ];
+      const currentIdTocando = document.querySelector(
+        '.playlist-item.title-green'
+      ).dataset.id;
       const nextListIndex =
-        (lists.findIndex(list => list.dataset.id === this.currentId) + 1) %
+        (lists.findIndex(list => list.dataset.id === currentIdTocando) + 1) %
         lists.length;
       const slug = lists[nextListIndex].dataset.id;
       const color = lists[nextListIndex].dataset.color;

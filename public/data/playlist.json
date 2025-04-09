@@ -96,5 +96,12 @@
     "pinned": true,
     "color": "#7d1fe9",
     "whatColoris": "morado oscuro"
+  },
+  {
+    "slug": "funk",
+    "title": "Funk",
+    "pinned": true,
+    "color": "#FAEBD7",
+    "whatColoris": "AntiqueWhite"
   }
 ]

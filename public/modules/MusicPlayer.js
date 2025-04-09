@@ -349,6 +349,13 @@ export class MusicPlayer {
     this.setSongs(this.musicList.getCurrent());
     this.currentSongIndex = -1;
     forcePlay && this.nextSong();
+    const currentPlaylistItem = document.querySelector(
+      '.playlist-item.title-green'
+    );
+    document
+      .querySelectorAll('.playlist-item-active')
+      .forEach(el => el.classList.remove('playlist-item-active'));
+    currentPlaylistItem.classList.add('playlist-item-active');
   }
 
   async prevList(forcePlay = true) {
