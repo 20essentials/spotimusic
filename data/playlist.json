@@ -103,5 +103,12 @@
     "pinned": true,
     "color": "#FAEBD7",
     "whatColoris": "AntiqueWhite"
+  },
+  {
+    "slug": "ncs",
+    "title": "Ncs",
+    "pinned": true,
+    "color": "#00FFFF",
+    "whatColoris": "Aqua"
   }
 ]
