@@ -110,5 +110,12 @@
     "pinned": true,
     "color": "#00FFFF",
     "whatColoris": "Aqua"
+  },
+  {
+    "slug": "indiepop",
+    "title": "Indie Pop",
+    "pinned": true,
+    "color": "#7FFFD4",
+    "whatColoris": "Aquamarine"
   }
 ]
