@@ -117,5 +117,12 @@
     "pinned": true,
     "color": "#7FFFD4",
     "whatColoris": "Aquamarine"
+  },
+  {
+    "slug": "background",
+    "title": "Background",
+    "pinned": true,
+    "color": "#A52A2A",
+    "whatColoris": "brown"
   }
 ]
