@@ -161,6 +161,10 @@ import List from '@/icons/list.astro';
       }
     }
   }
+
+  .sidebarPlaylist {
+    scroll-behavior: smooth;
+  }
 </style>
 
 <script is:inline>
@@ -171,6 +175,7 @@ import List from '@/icons/list.astro';
 
     input.addEventListener('input', () => {
       const searchTerm = input.value.toLowerCase();
+      playlistContainer.scrollTop = 0;
 
       const sortedPlaylists = [...originalPlaylists].sort((a, b) => {
         const aText = a.textContent.toLowerCase();
