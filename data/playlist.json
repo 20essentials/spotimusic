@@ -131,5 +131,12 @@
     "pinned": true,
     "color": "#DEB887",
     "whatColoris": "BurlyWood"
+  },
+  {
+    "slug": "alternative",
+    "title": "Alternative",
+    "pinned": true,
+    "color": "#5F9EA0",
+    "whatColoris": "Cadetblue"
   }
 ]
