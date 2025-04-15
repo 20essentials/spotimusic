@@ -138,5 +138,12 @@
     "pinned": true,
     "color": "#5F9EA0",
     "whatColoris": "Cadetblue"
+  },
+  {
+    "slug": "indierock",
+    "title": "Indie Rock",
+    "pinned": true,
+    "color": "#7FFF00",
+    "whatColoris": "Chartreuse"
   }
 ]
