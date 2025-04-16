@@ -106,7 +106,7 @@
   },
   {
     "slug": "ncs",
-    "title": "Ncs",
+    "title": "NCS",
     "pinned": true,
     "color": "#00FFFF",
     "whatColoris": "Aqua"
@@ -145,5 +145,12 @@
     "pinned": true,
     "color": "#7FFF00",
     "whatColoris": "Chartreuse"
+  },
+  {
+    "slug": "rockpop",
+    "title": "Rock Pop",
+    "pinned": true,
+    "color": "#D2691E",
+    "whatColoris": "Chocolate"
   }
 ]

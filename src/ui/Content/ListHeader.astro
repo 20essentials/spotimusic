@@ -75,7 +75,7 @@
             padding: 1.3vmax;
 
             .container-cover {
-              --size: 12vmax;
+              --size: 11.5vmax;
               position: relative;
               overflow: hidden;
               width: var(--size);
@@ -84,28 +84,28 @@
               outline: 0.15vmax var(--theme-color) solid;
 
               @media (width <= 1111px) and (orientation: portrait) {
-                --size: 13vmax;
+                --size: 10vmax;
               }
 
               * {
                 pointer-events: none;
               }
 
-             &::before {
-              content: "";
-              background: url('./assets/album-cover.avif');
-              width: var(--size);
-              height: var(--size);
-              background-size: var(--size);
-              top: 0;
-              left: 0;
-              background-position: center;
-              mix-blend-mode: screen;
-              opacity: 55%;
-              z-index: 2;
-              position: absolute;
-              pointer-events: none;
-            }
+                &::before {
+                  content: "";
+                  background: url('./assets/album-cover.avif');
+                  width: var(--size);
+                  height: var(--size);
+                  background-size: var(--size);
+                  top: 0;
+                  left: 0;
+                  background-position: center;
+                  mix-blend-mode: screen;
+                  opacity: 55%;
+                  z-index: 2;
+                  position: absolute;
+                  pointer-events: none;
+                }
 
               &::after {
                 content: '';
@@ -120,17 +120,16 @@
                   #fff1 40%,
                   transparent 75%
                 );
-                 background-blend-mode: overlay;
+                background-blend-mode: overlay;
                 filter: contrast(1.1) brightness(1.5) saturate(1.1);
               }
             }
 
-            & .cover {
+            .cover {
               width: var(--size);
               height: var(--size);
               background-color: #fff1;
               position: absolute;
-              inset: 0;
               aspect-ratio: 1;
             }
 
@@ -219,14 +218,30 @@
       const containerCover = this.shadowRoot.querySelector('.container-cover');
 
       function handleMover(e) {
-        const { clientX, clientY } = e;
+        e.preventDefault();
+
+        let clientX, clientY;
+
+        if (e.type === 'touchmove') {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        } else {
+          clientX = e.clientX;
+          clientY = e.clientY;
+        }
+
         const { left, top } = containerCover.getBoundingClientRect();
         const x = clientX - left;
         const y = clientY - top;
+
         containerCover.style.setProperty('--x', `${x}px`);
         containerCover.style.setProperty('--y', `${y}px`);
       }
+
       containerCover.addEventListener('pointermove', handleMover);
+      containerCover.addEventListener('touchmove', handleMover, {
+        passive: false
+      });
     }
 
     connectedCallback() {
