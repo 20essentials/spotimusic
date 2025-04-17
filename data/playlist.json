@@ -152,5 +152,12 @@
     "pinned": true,
     "color": "#D2691E",
     "whatColoris": "Chocolate"
+  },
+  {
+    "slug": "garage",
+    "title": "Garage",
+    "pinned": true,
+    "color": "#FF7F50",
+    "whatColoris": "Coral"
   }
 ]
