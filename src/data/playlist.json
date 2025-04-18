@@ -159,5 +159,12 @@
     "pinned": true,
     "color": "#FF7F50",
     "whatColoris": "Coral"
+  },
+  {
+    "slug": "electroacid",
+    "title": "Electro Acid",
+    "pinned": true,
+    "color": "#6495ED",
+    "whatColoris": "CornflowerBlue"
   }
 ]
