@@ -249,9 +249,10 @@
       this.addCoverMouseAnimation();
       const prev = this.shadowRoot.querySelector('.prev-list');
       const next = this.shadowRoot.querySelector('.next-list');
-      const playlistItems = document.querySelectorAll('.playlist-item');
-      const slugs = [...playlistItems].map(playlist => playlist.dataset.id);
+      let playlistItems = document.querySelectorAll('.playlist-item');
+      let slugs = [...playlistItems].map(playlist => playlist.dataset.id);
       const { length } = playlistItems;
+      const sidebarPlaylist = document.querySelector('.sidebarPlaylist');
 
       function clickOnPlaylist(targetIndex) {
         const slug = slugs[targetIndex];
@@ -259,7 +260,23 @@
           `.playlist-item[data-id="${slug}"]`
         );
         theTarget.click();
+        theTarget.focus();
       }
+
+      const input = document.getElementById('search-input');
+
+      document.addEventListener('keydown', ({ key }) => {
+        if (document.activeElement === input && key === 'Enter') {
+          const firstPlaylist = sidebarPlaylist.firstElementChild;
+          if (firstPlaylist) {
+            firstPlaylist.click();
+            firstPlaylist.focus();
+            this.currentIndex = 0;
+            playlistItems = document.querySelectorAll('.playlist-item');
+            slugs = [...playlistItems].map(playlist => playlist.dataset.id);
+          }
+        }
+      });
 
       prev?.addEventListener('click', () => {
         const prevIndex = (this.currentIndex - 1 + length) % length;
@@ -273,15 +290,57 @@
         this.currentIndex = nextIndex;
       });
 
+      document.addEventListener('click', e => {
+        if (e.target.matches('.playlist-item')) {
+          e.target.focus();
+          playlistItems = document.querySelectorAll('.playlist-item');
+          slugs = [...playlistItems].map(playlist => playlist.dataset.id);
+          let index = [...playlistItems].indexOf(e.target);
+          this.currentIndex = index;
+        }
+      });
+
       document.addEventListener('keydown', ({ key }) => {
         if (key === 'ArrowRight') {
           const nextIndex = (this.currentIndex + 1) % length;
           clickOnPlaylist(nextIndex);
           this.currentIndex = nextIndex;
+          sidebarPlaylist.scrollTop += 50;
+          if (nextIndex === 0) sidebarPlaylist.scrollTop = 0;
         } else if (key === 'ArrowLeft') {
           const prevIndex = (this.currentIndex - 1 + length) % length;
           clickOnPlaylist(prevIndex);
           this.currentIndex = prevIndex;
+          sidebarPlaylist.scrollTop -= 50;
+          if (prevIndex === length - 1)
+            sidebarPlaylist.scrollTop = sidebarPlaylist.scrollHeight;
+        }
+
+        if (key === 'ArrowDown') {
+          if (document.activeElement.classList.contains('playlist-item')) {
+            const nextIndex = (this.currentIndex + 1) % length;
+            clickOnPlaylist(nextIndex);
+            this.currentIndex = nextIndex;
+            sidebarPlaylist.scrollTop += 50;
+            if (nextIndex === 0) {
+              setTimeout(() => {
+                sidebarPlaylist.scrollTop = 10;
+              }, 1);
+            }
+          }
+        } else if (key === 'ArrowUp') {
+          if (document.activeElement.classList.contains('playlist-item')) {
+            const prevIndex = (this.currentIndex - 1 + length) % length;
+            clickOnPlaylist(prevIndex);
+            this.currentIndex = prevIndex;
+            sidebarPlaylist.scrollTop -= 50;
+
+            if (prevIndex === length - 1) {
+              setTimeout(() => {
+                sidebarPlaylist.scrollTop = sidebarPlaylist.scrollHeight;
+              }, 1);
+            }
+          }
         }
       });
     }

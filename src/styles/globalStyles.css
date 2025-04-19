@@ -12,9 +12,9 @@
   padding: 0;
 }
 
-button {
+button, svg {
   &:focus {
-    border-color: transparent;
-    outline-color: transparent;
+    border: none;
+    outline: none;
   }
 }

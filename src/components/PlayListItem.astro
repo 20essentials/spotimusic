@@ -1,7 +1,7 @@
 ---
 import PinnedIcon from '@/icons/pinned.astro';
 import Volume from '@/icons/music.astro';
-const { slug, title, pinned, color } = Astro.props;
+const { slug, title, pinned, color, tab } = Astro.props;
 
 const initialLetterOfEachWord = title
   .split(/\s+/)
@@ -34,10 +34,18 @@ const image = randomSrc;
     gap: 0.5vmax;
     border-radius: 8px;
     height: max-content;
-    padding-inline: 0.6vmax;
     position: relative;
     cursor: pointer;
     transition: background-color 0.2s ease;
+
+    * {
+      pointer-events: none;
+    }
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
 
     &.title-green {
       .title {
@@ -113,7 +121,7 @@ const image = randomSrc;
   }
 </style>
 
-<aside class='playlist-item' data-id={slug} data-color={color}>
+<aside class='playlist-item' data-id={slug} data-color={color} tabindex={tab}>
   <img src={image} alt={title} />
   <div class='data'>
     <strong class='title'>{title}</strong>
