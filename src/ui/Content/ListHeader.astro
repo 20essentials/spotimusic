@@ -266,7 +266,10 @@
       const input = document.getElementById('search-input');
 
       document.addEventListener('keydown', ({ key }) => {
-        if (document.activeElement === input && key === 'Enter') {
+        const inputHasFocus = document.activeElement === input;
+        const clickEnter = inputHasFocus && key === 'Enter';
+        const clickArrowDown = inputHasFocus && key === 'ArrowDown';
+        const selecttFirsPlaylist = () => {
           const firstPlaylist = sidebarPlaylist.firstElementChild;
           if (firstPlaylist) {
             firstPlaylist.click();
@@ -275,6 +278,16 @@
             playlistItems = document.querySelectorAll('.playlist-item');
             slugs = [...playlistItems].map(playlist => playlist.dataset.id);
           }
+        };
+
+        if (clickEnter) {
+          selecttFirsPlaylist();
+        }
+
+        if (clickArrowDown) {
+          setTimeout(() => {
+            selecttFirsPlaylist();
+          }, 1);
         }
       });
 

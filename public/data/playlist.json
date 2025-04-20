@@ -173,5 +173,12 @@
     "pinned": true,
     "color": "#FFF8DC",
     "whatColoris": "CornSilk"
+  },
+  {
+    "slug": "rockandroll",
+    "title": "Rock and Roll",
+    "pinned": true,
+    "color": "#DC143C",
+    "whatColoris": "Crimson"
   }
 ]
