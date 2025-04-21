@@ -180,5 +180,12 @@
     "pinned": true,
     "color": "#DC143C",
     "whatColoris": "Crimson"
+  },
+  {
+    "slug": "synthpop",
+    "title": "Synthpop",
+    "pinned": true,
+    "color": "#00FFFF",
+    "whatColoris": "Cyan"
   }
 ]
