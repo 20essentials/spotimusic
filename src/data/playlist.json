@@ -187,5 +187,12 @@
     "pinned": true,
     "color": "#00FFFF",
     "whatColoris": "Cyan"
+  },
+  {
+    "slug": "darknight",
+    "title": "Dark Night",
+    "pinned": true,
+    "color": "#000fff",
+    "whatColoris": "DarkBlue"
   }
 ]
