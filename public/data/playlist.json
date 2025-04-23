@@ -194,5 +194,12 @@
     "pinned": true,
     "color": "#000fff",
     "whatColoris": "DarkBlue"
+  },
+  {
+    "slug": "discopop",
+    "title": "Disco Pop",
+    "pinned": true,
+    "color": "#008B8B",
+    "whatColoris": "DarkCyan"
   }
 ]
