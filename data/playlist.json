@@ -201,5 +201,12 @@
     "pinned": true,
     "color": "#008B8B",
     "whatColoris": "DarkCyan"
+  },
+  {
+    "slug": "hyperpop",
+    "title": "Hyperpop",
+    "pinned": true,
+    "color": "#B8860B",
+    "whatColoris": "DarkGoldenRod"
   }
 ]
