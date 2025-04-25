@@ -23,10 +23,11 @@
           background: #0004;
           z-index: 50;
           backdrop-filter: blur(0.5vmax);
+          height: calc(100vh - var(--player-height));
         }
 
         atropos-component {
-          --size: 25vmax;
+          --size: 22vmax;
           width: var(--size);
           height: var(--size);
           z-index: 5;
@@ -36,7 +37,6 @@
           left: calc(50% - var(--size) / 2);
           top: calc(50% - var(--size) / 2);
 
-
           & .cover {
             max-width: var(--size);
             max-height: var(--size);
@@ -44,7 +44,6 @@
             position: absolute;
             top: 0;
             left: 0;
-            
 
             &::after {
               content: "";
@@ -81,7 +80,8 @@
           img {
             width: var(--size);
             height: var(--size);
-            
+            height: 100%;
+            object-fit: cover;
           }
         }
       `;
