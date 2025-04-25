@@ -208,5 +208,12 @@
     "pinned": true,
     "color": "#B8860B",
     "whatColoris": "DarkGoldenRod"
+  },
+  {
+    "slug": "retrowave",
+    "title": "Retrowave",
+    "pinned": true,
+    "color": "#A9A9A9",
+    "whatColoris": "DarkGray"
   }
 ]
