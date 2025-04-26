@@ -215,5 +215,12 @@
     "pinned": true,
     "color": "#A9A9A9",
     "whatColoris": "DarkGray"
+  },
+  {
+    "slug": "newage",
+    "title": "New Age",
+    "pinned": true,
+    "color": "#006400",
+    "whatColoris": "DarkGreen"
   }
 ]
