@@ -222,5 +222,12 @@
     "pinned": true,
     "color": "#006400",
     "whatColoris": "DarkGreen"
+  },
+  {
+    "slug": "popcore",
+    "title": "Popcore",
+    "pinned": true,
+    "color": "#BDB76B",
+    "whatColoris": "DarkKhaki"
   }
 ]
