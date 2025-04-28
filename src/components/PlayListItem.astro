@@ -3,11 +3,7 @@ import PinnedIcon from '@/icons/pinned.astro';
 import Volume from '@/icons/music.astro';
 const { slug, title, pinned, color, tab } = Astro.props;
 
-const initialLetterOfEachWord = title
-  .split(/\s+/)
-  .map((palabra: string) => palabra.charAt(0))
-  .join('')
-  .toUpperCase();
+const initialLetterOfEachWord = title.slice(0, 3).toUpperCase();
 
 type SongData = {
   urlPoster: string;

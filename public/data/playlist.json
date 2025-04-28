@@ -229,5 +229,12 @@
     "pinned": true,
     "color": "#BDB76B",
     "whatColoris": "DarkKhaki"
+  },
+  {
+    "slug": "softrock",
+    "title": "Soft Rock",
+    "pinned": true,
+    "color": "#8B008B",
+    "whatColoris": "DarkMagenta"
   }
 ]

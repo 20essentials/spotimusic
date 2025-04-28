@@ -313,14 +313,28 @@
         }
       });
 
+      function existCoverCard() {
+        return document.querySelector('cover-card');
+      }
+
       document.addEventListener('keydown', ({ key }) => {
         if (key === 'ArrowRight') {
+          if (existCoverCard()) {
+            const nextSongButton = document.querySelector('button.next');
+            nextSongButton.click();
+            return;
+          }
           const nextIndex = (this.currentIndex + 1) % length;
           clickOnPlaylist(nextIndex);
           this.currentIndex = nextIndex;
           sidebarPlaylist.scrollTop += 50;
           if (nextIndex === 0) sidebarPlaylist.scrollTop = 0;
         } else if (key === 'ArrowLeft') {
+          if (existCoverCard()) {
+            const prevSongButton = document.querySelector('button.prev');
+            prevSongButton.click();
+            return;
+          }
           const prevIndex = (this.currentIndex - 1 + length) % length;
           clickOnPlaylist(prevIndex);
           this.currentIndex = prevIndex;
@@ -330,6 +344,7 @@
         }
 
         if (key === 'ArrowDown') {
+          if (existCoverCard()) return;
           if (document.activeElement.classList.contains('playlist-item')) {
             const nextIndex = (this.currentIndex + 1) % length;
             clickOnPlaylist(nextIndex);
@@ -342,6 +357,7 @@
             }
           }
         } else if (key === 'ArrowUp') {
+          if (existCoverCard()) return;
           if (document.activeElement.classList.contains('playlist-item')) {
             const prevIndex = (this.currentIndex - 1 + length) % length;
             clickOnPlaylist(prevIndex);
