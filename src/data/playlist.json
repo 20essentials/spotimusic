@@ -236,5 +236,12 @@
     "pinned": true,
     "color": "#8B008B",
     "whatColoris": "DarkMagenta"
+  },
+  {
+    "slug": "soulpop",
+    "title": "Soul Pop",
+    "pinned": true,
+    "color": "#556B2F",
+    "whatColoris": "DarkOliveGreen"
   }
 ]
