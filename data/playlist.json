@@ -243,5 +243,12 @@
     "pinned": true,
     "color": "#556B2F",
     "whatColoris": "DarkOliveGreen"
+  },
+  {
+    "slug": "guitar",
+    "title": "Guitar",
+    "pinned": true,
+    "color": "#FF8C00",
+    "whatColoris": "DarkOrange"
   }
 ]
