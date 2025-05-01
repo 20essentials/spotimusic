@@ -192,8 +192,8 @@
     "slug": "darknight",
     "title": "Dark Night",
     "pinned": true,
-    "color": "#000fff",
-    "whatColoris": "DarkBlue"
+    "color": "#8B0000",
+    "whatColoris": "Dark Red"
   },
   {
     "slug": "discopop",
@@ -250,5 +250,12 @@
     "pinned": true,
     "color": "#FF8C00",
     "whatColoris": "DarkOrange"
+  },
+  {
+    "slug": "ambient",
+    "title": "Ambient",
+    "pinned": true,
+    "color": "#9932CC",
+    "whatColoris": "DarkOrchid"
   }
 ]
