@@ -257,5 +257,12 @@
     "pinned": true,
     "color": "#9932CC",
     "whatColoris": "DarkOrchid"
+  },
+  {
+    "slug": "soul",
+    "title": "Soul",
+    "pinned": true,
+    "color": "#E9967A",
+    "whatColoris": "DarkSalmon"
   }
 ]
