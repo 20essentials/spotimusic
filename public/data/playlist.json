@@ -264,5 +264,12 @@
     "pinned": true,
     "color": "#E9967A",
     "whatColoris": "DarkSalmon"
+  },
+  {
+    "slug": "vaporwave",
+    "title": "Vaporwave",
+    "pinned": true,
+    "color": "#8FBC8F",
+    "whatColoris": "DarkSeaGreen"
   }
 ]
