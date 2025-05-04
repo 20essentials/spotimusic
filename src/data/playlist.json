@@ -271,5 +271,12 @@
     "pinned": true,
     "color": "#8FBC8F",
     "whatColoris": "DarkSeaGreen"
+  },
+  {
+    "slug": "skweee",
+    "title": "Skweee",
+    "pinned": true,
+    "color": "#483D8B",
+    "whatColoris": "DarkSlateBlue"
   }
 ]
