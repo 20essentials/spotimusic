@@ -278,5 +278,12 @@
     "pinned": true,
     "color": "#483D8B",
     "whatColoris": "DarkSlateBlue"
+  },
+  {
+    "slug": "techno",
+    "title": "Techno",
+    "pinned": true,
+    "color": "#2F4F4F",
+    "whatColoris": "DarkSlateGray"
   }
 ]
