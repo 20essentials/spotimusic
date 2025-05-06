@@ -285,5 +285,12 @@
     "pinned": true,
     "color": "#2F4F4F",
     "whatColoris": "DarkSlateGray"
+  },
+  {
+    "slug": "darkfolk",
+    "title": "Dark Folk",
+    "pinned": true,
+    "color": "#00CED1",
+    "whatColoris": "DarkTurquoise"
   }
 ]
