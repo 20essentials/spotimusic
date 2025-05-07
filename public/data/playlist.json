@@ -292,5 +292,12 @@
     "pinned": true,
     "color": "#00CED1",
     "whatColoris": "DarkTurquoise"
+  },
+  {
+    "slug": "hauntology",
+    "title": "Hauntology",
+    "pinned": true,
+    "color": "#9400D3",
+    "whatColoris": "DarkViolet"
   }
 ]
